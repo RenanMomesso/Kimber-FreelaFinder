@@ -1,0 +1,13 @@
+{
+  "name": "freelafinder",
+  "displayName": "freelafinder",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-7269030129122405~6492266558",
+    "ios_app_id": "ca-app-pub-xxxxxxxx~xxxxxxxx"
+  },
+  "extra": {
+    "eas": {
+      "projectId": "1ba75991-5b19-409a-bcfe-3a2d65100903"
+    }
+  }
+}

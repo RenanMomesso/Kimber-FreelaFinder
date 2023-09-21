@@ -1,0 +1,249 @@
+
+enum ActivityType {
+  MESSAGE
+  JOB
+  USER
+  PORTIFOLIO
+}
+
+enum NotificationType {
+  APPLIED
+  COMPLETED
+  PAID
+}
+
+enum AttachmentType {
+  IMAGE
+  VIDEO
+  AUDIO
+}
+
+
+enum Status {
+  OPEN
+  INPROGRESS
+  COMPLETED
+  ASSIGNED
+  FINISHED
+  CANCELED
+  PAID
+}
+
+enum UserStatus {
+  REPORTED
+  DELETED
+  FREQUENT
+  RARELY
+  NORMAL
+}
+
+enum DifficultyEnums {
+  EASY
+  MEDIUM
+  HARD
+  FAST
+}
+
+type Mutation {
+  createPaymentIntent(amount: Int!): PaymentIntent! @function(name: "createPaymentIntent-${env}")
+}
+
+type PaymentIntent {
+  clientSecret: String
+}
+
+
+type UserCreated {
+  user: User
+}
+
+
+type Favorites @model @auth(rules:[{allow:public}]) {
+  id: ID!
+  user: ID @index(name: "byUser")
+  jobID: Job!
+}
+
+type Location @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  city: String
+  state: String
+  lat: String
+  long: String
+  country: String
+  street: String
+  userID: ID @index(name: "byUser")
+}
+
+type UserPayment @model @auth(rules: [{allow:public}]){
+  id: ID!
+  userID: ID @index(name: "byUser")
+  
+  
+}
+
+type Portifolio @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  filesKey: [String]
+  backgroundImageKey: String
+  content: String
+  userID: ID! @index(name: "byUser")
+  startedDate: String
+  endDate:String
+  techologiesUsed: [String]
+}
+
+type Images @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  key: String
+  url: String
+  jobID: ID @index(name: "byJob")
+}
+
+type ActivityHistoric @model @auth(rules: [{allow:public}]) {
+  id: ID!
+  userID: ID! @index(name: "byUser")
+  type: ActivityType
+  typeID: String
+  typeText: String
+} 
+
+type JobHistoricModel @model @auth(rules: [{allow:public}]) {
+  id: ID!
+  userID: ID @index(name: "byUser")
+  startDate: AWSDateTime
+  endDate: AWSDateTime
+  company: String
+  jobTitle: String
+  jobDescription: String
+}
+
+
+
+type Category @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  userID: ID @index(name: "byUser")
+}
+
+type UserApply @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  userID: ID @index(name: "byUser")
+  jobID: ID @index(name: "byJob")
+  selectedPortifolio: Portifolio @hasOne
+  files: [String]
+  text: String
+  price: String
+  userName: String
+  userAvatar: String
+  userStatus: UserStatus
+}
+
+type Notification @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  text: String!
+  userID: ID! @index(name: "byUser")
+  jobID: ID! @index(name: "byJob")
+  read: Boolean
+  senderID: String!
+  notificationType: NotificationType
+}
+
+type JobDoneBy @model @auth(rules: [{allow:public}]) {
+  id: ID!
+  jobID: ID @index(name: "byJob")
+  userID: ID @index(name: "byUser")
+  user: User @hasOne
+  status: Status
+  paid: Boolean
+  jobPaidValue: String
+  jobPaidDate: AWSDateTime
+
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  fullname: String @index(name: "usersByFullname", queryField: "usersByFullname")
+  reviewsLength: Int
+  totalJobsDone: Int
+  email: String @index(name: "usersByEmail", queryField: "usersByEmail") 
+  phoneNumber: String
+  avatar: String
+  notificationsActived: Boolean
+  website: String
+  firstTimeLoggin: Boolean
+  categories: [String]
+  Locations: [Location] @hasMany(indexName: "byUser", fields: ["id"])
+  Portifolios: [Portifolio] @hasMany(indexName: "byUser", fields: ["id"])
+  hasDeficiency: Boolean
+  Favorites: [Favorites] @hasMany(indexName: "byUser", fields: ["id"])
+  ChatRooms: [ChatRoom] @manyToMany(relationName: "UserChatRoom")
+  Messages: [Message] @hasMany(indexName: "byUser", fields: ["id"])
+  points: Int
+  profission: String
+  backgroundImage: String
+  Notifications: [Notification] @hasMany(indexName: "byUser", fields: ["id"])
+  selectedPortifolio: Portifolio @hasOne
+  status: UserStatus
+  jobsHistoric: [JobHistoricModel] @hasMany(indexName: "byUser", fields: ["id"])
+  ActivityHistoric: [ActivityHistoric] @hasMany(indexName: "byUser", fields: ["id"])
+  about: String
+  cv: String
+}
+
+type Attachment @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  storageKey: String!
+  type: AttachmentType!
+  width: Int
+  height: Int
+  duration: Int
+  messageID: ID! @index(name: "byMessage")
+  chatroomID: ID! @index(name: "byChatRoom")
+}
+
+type ChatRoom @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  Messages: [Message] @hasMany(indexName: "byChatRoom", fields: ["id"])
+  users: [User] @manyToMany(relationName: "UserChatRoom")
+  LastMessage: Message @hasOne
+  Attachments: [Attachment] @hasMany(indexName: "byChatRoom", fields: ["id"])
+}
+
+type Message @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  text: String
+  chatroomID: ID! @index(name: "byChatRoom")
+  userID: ID! @index(name: "byUser")
+  images: [String]
+  Attachments: [Attachment] @hasMany(indexName: "byMessage", fields: ["id"])
+}
+
+type Job @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  description: String
+  dateTimestamp: AWSTimestamp
+  dateDate: AWSDateTime
+  location: AWSJSON
+  canBeDoneRemotely: Boolean
+  minimumPrice: Float
+  qualifications: [String]
+  difficulty: DifficultyEnums
+  status: Status
+  urgent: Boolean
+  author: User @hasOne
+  Images: [Images] @hasMany(indexName: "byJob", fields: ["id"])
+  needPreviousExperience: Boolean
+  categories: [String]
+  points: Int
+  jobDoneBy: JobDoneBy @hasOne
+  userApply: [UserApply] @hasMany(indexName: "byJob", fields: ["id"])
+  completedAt: AWSDateTime
+}
+
+
+
+
