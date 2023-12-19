@@ -1,25 +1,25 @@
 {
   "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-freelafinder-staging-152020-authRole",
-      "UnauthRoleArn": "arn:aws:iam::251150211793:role/amplify-freelafinder-staging-152020-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::251150211793:role/amplify-freelafinder-staging-152020-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-freelafinder-staging-152020-deployment",
-      "UnauthRoleName": "amplify-freelafinder-staging-152020-unauthRole",
-      "StackName": "amplify-freelafinder-staging-152020",
-      "StackId": "arn:aws:cloudformation:us-east-1:251150211793:stack/amplify-freelafinder-staging-152020/15b32260-311c-11ed-9f45-0a651203dc53",
-      "AmplifyAppId": "d13xd4ehlqbpxu"
+      "AuthRoleName": "",
+      "UnauthRoleArn": "",
+      "AuthRoleArn": "",
+      "Region": "",
+      "DeploymentBucketName": "",
+      "UnauthRoleName": "",
+      "StackName": "",
+      "StackId": "",
+      "AmplifyAppId": ""
     },
     "categories": {
       "function": {
         "postconfirmation": {
-          "deploymentBucketName": "amplify-freelafinder-staging-152020-deployment",
-          "s3Key": "amplify-builds/postconfirmation-665369305a3972557665-build.zip"
+          "deploymentBucketName": "",
+          "s3Key": ""
         },
         "removeScheduleJobs": {
-          "deploymentBucketName": "amplify-freelafinder-staging-152020-deployment",
-          "s3Key": "amplify-builds/removeScheduleJobs-5435314b56347756764b-build.zip"
+          "deploymentBucketName": "",
+          "s3Key": "]"
         }
       },
       "auth": {
@@ -28,64 +28,5 @@
       }
     }
   },
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-freelafinder-dev-232840-authRole",
-      "UnauthRoleArn": "arn:aws:iam::251150211793:role/amplify-freelafinder-dev-232840-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::251150211793:role/amplify-freelafinder-dev-232840-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-freelafinder-dev-232840-deployment",
-      "UnauthRoleName": "amplify-freelafinder-dev-232840-unauthRole",
-      "StackName": "amplify-freelafinder-dev-232840",
-      "StackId": "arn:aws:cloudformation:us-east-1:251150211793:stack/amplify-freelafinder-dev-232840/b75600f0-87e9-11ed-9925-125779d0c5b5",
-      "AmplifyAppId": "d13xd4ehlqbpxu"
-    },
-    "categories": {
-      "auth": {
-        "freelafinder": {}
-      },
-      "function": {
-        "postconfirmation": {
-          "deploymentBucketName": "amplify-freelafinder-dev-232840-deployment",
-          "s3Key": "amplify-builds/postconfirmation-665369305a3972557665-build.zip"
-        },
-        "removeScheduleJobs": {
-          "deploymentBucketName": "amplify-freelafinder-dev-232840-deployment",
-          "s3Key": "amplify-builds/removeScheduleJobs-5435314b56347756764b-build.zip"
-        },
-        "createPaymentIntent": {
-          "deploymentBucketName": "amplify-freelafinder-dev-232840-deployment",
-          "s3Key": "amplify-builds/createPaymentIntent-775a4144447a486a5556-build.zip"
-        }
-      }
-    }
-  },
-  "production": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-freelafinder-production-150526-authRole",
-      "UnauthRoleArn": "arn:aws:iam::251150211793:role/amplify-freelafinder-production-150526-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::251150211793:role/amplify-freelafinder-production-150526-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-freelafinder-production-150526-deployment",
-      "UnauthRoleName": "amplify-freelafinder-production-150526-unauthRole",
-      "StackName": "amplify-freelafinder-production-150526",
-      "StackId": "arn:aws:cloudformation:us-east-1:251150211793:stack/amplify-freelafinder-production-150526/0e524b80-8ac8-11ed-afbf-12e4d1f03997",
-      "AmplifyAppId": "d13xd4ehlqbpxu"
-    },
-    "categories": {
-      "auth": {
-        "freelafinder": {}
-      },
-      "function": {
-        "postconfirmation": {
-          "deploymentBucketName": "amplify-freelafinder-production-150526-deployment",
-          "s3Key": "amplify-builds/postconfirmation-665369305a3972557665-build.zip"
-        },
-        "removeScheduleJobs": {
-          "deploymentBucketName": "amplify-freelafinder-production-150526-deployment",
-          "s3Key": "amplify-builds/removeScheduleJobs-5435314b56347756764b-build.zip"
-        }
-      }
-    }
-  }
+ 
 }
